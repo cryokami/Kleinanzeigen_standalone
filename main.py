@@ -7,8 +7,11 @@ import numpy
 from bs4 import BeautifulSoup
 from urllib.request import Request, urlopen
 
-dblink = "postgresql+psycopg2://postgres:bean@192.168.178.56:5432/ebay"
-engine = sqlalchemy.create_engine(dblink)
+with open("dblink.txt", "r") as f:
+    dblink = f.read()
+    engine = sqlalchemy.create_engine(dblink)
+
+
 
 def db():
     query0 = "CREATE TABLE IF NOT EXISTS searches(s_id SERIAL NOT NULL, searchlink TEXT NOT NULL UNIQUE, PRIMARY KEY(s_id));"
@@ -76,8 +79,10 @@ def interval_scrape():
         dataid=targetdf['dataid'][i]
         print(dataid)
 
-#TODO find a sensitive method of scraping
+#TODO find a sensitive method of scraping at time intervals
 #add link 1. add link, search new targets, scrape initial info for the targets
 #interval scrapes:1.get all links from the targets folder, scrape the information.
 if __name__ == "__main__":
-  interval_scrape()
+
+
+   interval_scrape()
